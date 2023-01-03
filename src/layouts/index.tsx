@@ -7,9 +7,11 @@
 
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import GlobalStyle from "../components/styles/globalStyles"
 
-import Header from "./header"
-import "./layout.css"
+import { Wrapper, PageContainer } from "./styles"
+import Header from "../components/header"
+import styles from "../components/styles/styles"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -32,16 +34,26 @@ const Layout = ({ children }) => {
           padding: `var(--size-gutter)`,
         }}
       >
-        <main>{children}</main>
+        <GlobalStyle />
+        <Wrapper>
+          <PageContainer>{children}</PageContainer>
+        </Wrapper>
         <footer
           style={{
             marginTop: `var(--space-5)`,
             fontSize: `var(--font-sm)`,
+            backgroundColor: styles.colors.backgroundGrey,
+            position: "absolute",
+            width: "100%",
+            height: "60px",
+            display: "flex",
+            alignItems: "center",
+            borderTop: `1px solid ${styles.colors.borderGrey}`,
+            bottom: 0,
+            paddingLeft: "8px",
           }}
         >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
+          © {new Date().getFullYear()} &middot; CH
         </footer>
       </div>
     </>
