@@ -3,18 +3,27 @@ import { HeaderWrapper } from "./styles"
 import InitialButton from "../initialButton"
 import LinkText from "../linkText"
 
+let defaultPath = ""
+const isBrowser = typeof window !== "undefined"
+
+if (typeof window !== "undefined") {
+  defaultPath = window.location.pathname
+}
+
 const Header = () => {
-  const [currentPath, setCurrentPath] = React.useState("")
-  const isBrowser = typeof window !== "undefined"
+  const [currentPath, setCurrentPath] = React.useState(defaultPath)
 
   React.useEffect(() => {
-    if (isBrowser && window.location.pathname !== "/") {
-      const path = window.location.pathname
-      const cleanPath = path.replace(/\//g, "")
-      setCurrentPath(cleanPath)
-    } else {
-      setCurrentPath("")
+    const handler = () => {
+      if (isBrowser && window.location.pathname !== "/") {
+        const path = window.location.pathname
+        const cleanPath = path.replace(/\//g, "")
+        setCurrentPath(cleanPath)
+      } else {
+        setCurrentPath("")
+      }
     }
+    window.addEventListener("popstate", handler)
   }, [isBrowser, window, currentPath])
 
   return (
