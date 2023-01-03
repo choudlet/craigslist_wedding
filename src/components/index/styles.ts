@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import styles from "../../components/styles/styles"
+import styles from "../styles/styles"
 
 export const Container = styled.div`
   margin: 3rem auto;

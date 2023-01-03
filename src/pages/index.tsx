@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
-import { Container, MenuItem } from "./index/styles"
+import { Container, MenuItem } from "../components/index/styles"
 
 export default function MainMenu() {
   return (
