@@ -34,7 +34,7 @@ const Header = () => {
         window.removeEventListener("popstate", handler)
       }
     }
-  }, [isBrowser, window, currentPath])
+  }, [currentPath])
 
   return (
     <HeaderWrapper>
