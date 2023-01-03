@@ -15,10 +15,12 @@ const Header = () => {
 
   React.useEffect(() => {
     const handler = () => {
-      if (isBrowser && window.location.pathname !== "/") {
-        const path = window.location.pathname
-        const cleanPath = path.replace(/\//g, "")
-        setCurrentPath(cleanPath)
+      if (isBrowser && window?.location?.pathname !== "/") {
+        const path = window?.location?.pathname
+        if (path) {
+          const cleanPath = path.replace(/\//g, "")
+          setCurrentPath(cleanPath)
+        }
       } else {
         setCurrentPath("")
       }
