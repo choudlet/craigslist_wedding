@@ -3,18 +3,19 @@ import { HeaderWrapper } from "./styles"
 import InitialButton from "../initialButton"
 import LinkText from "../linkText"
 
-const Header = ({ siteTitle }) => {
+const Header = () => {
   const [currentPath, setCurrentPath] = React.useState("")
+  const isBrowser = typeof window !== "undefined"
 
   React.useEffect(() => {
-    if (window.location.pathname !== "/") {
+    if (isBrowser && window.location.pathname !== "/") {
       const path = window.location.pathname
       const cleanPath = path.replace(/\//g, "")
       setCurrentPath(cleanPath)
     } else {
       setCurrentPath("")
     }
-  }, [window.location.pathname, currentPath])
+  }, [isBrowser, window?.location?.pathname, currentPath])
 
   return (
     <HeaderWrapper>
