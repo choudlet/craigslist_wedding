@@ -13,23 +13,28 @@ if (typeof window !== "undefined") {
 const Header = () => {
   const [currentPath, setCurrentPath] = React.useState(defaultPath)
 
-  if (window !== undefined) {
-    React.useEffect(() => {
-      const handler = () => {
-        if (isBrowser && window?.location?.pathname !== "/") {
-          const path = window?.location?.pathname
-          if (path) {
-            const cleanPath = path.replace(/\//g, "")
-            setCurrentPath(cleanPath)
-          }
-        } else {
-          setCurrentPath("")
+  React.useEffect(() => {
+    const handler = () => {
+      if (isBrowser && window?.location?.pathname !== "/") {
+        const path = window?.location?.pathname
+        if (path) {
+          const cleanPath = path.replace(/\//g, "")
+          setCurrentPath(cleanPath)
         }
+      } else {
+        setCurrentPath("")
       }
+    }
+    if (typeof window !== "undefined") {
       window.addEventListener("popstate", handler)
-      return () => window.removeEventListener("popstate", handler)
-    }, [isBrowser, window, currentPath])
-  }
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("popstate", handler)
+      }
+    }
+  }, [isBrowser, window, currentPath])
 
   return (
     <HeaderWrapper>
