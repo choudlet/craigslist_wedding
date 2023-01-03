@@ -15,7 +15,7 @@ const Header = () => {
     } else {
       setCurrentPath("")
     }
-  }, [isBrowser, window?.location?.pathname, currentPath])
+  }, [isBrowser, window, currentPath])
 
   return (
     <HeaderWrapper>
