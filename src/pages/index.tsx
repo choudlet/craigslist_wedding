@@ -11,8 +11,11 @@ export default function MainMenu() {
         </Link>
       </MenuItem>
       <MenuItem>
-        <Link to="/events" style={{ textDecoration: "none", opacity: 1 }}>
-          events
+        <Link
+          to="/reccomendations"
+          style={{ textDecoration: "none", opacity: 1 }}
+        >
+          reccomendations
         </Link>
       </MenuItem>
       <MenuItem>
