@@ -7,7 +7,7 @@ import StyledInput from "../styledInput"
 import { InputContainer } from "./styles"
 
 // TODO move this to a separate file
-const PASSWORD = "<3Springsteen"
+const PASSWORD = "portland"
 
 const PasswordContainer = ({ children }) => {
   const [password, setPassword] = React.useState("")
