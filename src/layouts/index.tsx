@@ -12,6 +12,7 @@ import GlobalStyle from "../components/styles/globalStyles"
 import { Wrapper, PageContainer } from "./styles"
 import Header from "../components/header"
 import styles from "../components/styles/styles"
+import PasswordContainer from "../components/passwordContainer"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -36,7 +37,9 @@ const Layout = ({ children }) => {
       >
         <GlobalStyle />
         <Wrapper>
-          <PageContainer>{children}</PageContainer>
+          <PasswordContainer>
+            <PageContainer>{children}</PageContainer>
+          </PasswordContainer>
         </Wrapper>
         <footer
           style={{

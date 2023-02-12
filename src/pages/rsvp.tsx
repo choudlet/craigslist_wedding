@@ -7,13 +7,13 @@ import StyledInput from "../components/styledInput"
 import styles from "../components/styles/styles"
 
 import { getFirestore, doc, collection, addDoc } from "firebase/firestore"
+import { StaticImage } from "gatsby-plugin-image"
 
 const db = getFirestore(firebase)
 
 const Rsvp = () => {
   const [name, setName] = React.useState("")
   const [email, setEmail] = React.useState("")
-  const [partySize, setPartySize] = React.useState("")
   const [comment, setComments] = React.useState("")
 
   const [submitted, setSubmitted] = React.useState(false)
@@ -23,7 +23,7 @@ const Rsvp = () => {
     const document = {
       name,
       email,
-      partySize,
+
       comment,
     }
     const rsvpsCollectionRef = collection(db, "rsvps")
@@ -58,15 +58,6 @@ const Rsvp = () => {
             }}
           />
           <br />
-          <StyledInput
-            style={{ height: 30 }}
-            type="text"
-            placeholder="party size"
-            onChange={e => {
-              setPartySize(e.target.value)
-            }}
-          />
-          <br />
           <textarea
             style={{
               fontFamily: "arial",
@@ -80,7 +71,10 @@ const Rsvp = () => {
             rows={5}
             cols={40}
           ></textarea>
+          <br />
           <StyledButton onClick={onClickSubmit}>submit</StyledButton>
+          <br />
+          <StaticImage src="../images/flowers.jpg" alt="flowers" height={200} />
         </>
       )}
     </PageContainer>

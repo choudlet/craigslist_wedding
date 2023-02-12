@@ -2,46 +2,48 @@ import * as React from "react"
 import { HeaderWrapper } from "./styles"
 import InitialButton from "../initialButton"
 import LinkText from "../linkText"
+import { navigate } from "gatsby"
 
 let defaultPath = ""
 const isBrowser = typeof window !== "undefined"
 
 if (typeof window !== "undefined") {
-  defaultPath = window.location.pathname
+  defaultPath =
+    window.location.pathname !== "/"
+      ? window.location.pathname.replace(/\//g, "")
+      : ""
 }
 
 const Header = () => {
   const [currentPath, setCurrentPath] = React.useState(defaultPath)
 
-  React.useEffect(() => {
-    const handler = () => {
-      if (isBrowser && window?.location?.pathname !== "/") {
-        const path = window?.location?.pathname
-        if (path) {
-          const cleanPath = path.replace(/\//g, "")
-          setCurrentPath(cleanPath)
-        }
-      } else {
-        setCurrentPath("")
-      }
-    }
-    if (typeof window !== "undefined") {
-      window.addEventListener("popstate", handler)
-    }
+  const handleNavigation = () => {
+    navigate("/")
+  }
 
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("popstate", handler)
+  if (isBrowser) {
+    React.useEffect(() => {
+      const handler = () => {
+        if (isBrowser && window?.location?.pathname !== "/") {
+          const path = window?.location?.pathname
+          if (path) {
+            const cleanPath = path.replace(/\//g, "")
+            setCurrentPath(cleanPath)
+          }
+        } else {
+          setCurrentPath("")
+        }
       }
-    }
-  }, [currentPath])
+      handler()
+    }, [window?.location?.pathname, currentPath])
+  }
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper onClick={handleNavigation}>
       <InitialButton />
       {currentPath !== "" ? (
         <>
-          <p>renee and reed</p>
+          <LinkText text="renee and reed" />
           <p style={{ fontSize: 20 }}>&gt;</p>
           <p>{currentPath}</p>
         </>
