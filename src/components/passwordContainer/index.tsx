@@ -9,17 +9,22 @@ import { InputContainer } from "./styles"
 // TODO move this to a separate file
 const PASSWORD = "portland"
 
+let localPassword
+if (typeof window !== "undefined") {
+  localPassword = window.localStorage.getItem("password")
+}
+
 const PasswordContainer = ({ children }) => {
   const [password, setPassword] = React.useState("")
   const [loading, setLoading] = React.useState(true)
   const [passwordCorrect, setPasswordCorrect] = React.useState(false)
 
   React.useEffect(() => {
-    if (window.localStorage.getItem("password") === PASSWORD) {
+    if (localPassword === PASSWORD) {
       setPasswordCorrect(true)
     }
     setLoading(false)
-  }, [])
+  }, [localPassword])
 
   const handleChange = e => {
     setPassword(e.target.value)
