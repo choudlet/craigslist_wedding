@@ -58,7 +58,7 @@ const Rsvp = () => {
             }}
           />
           <br />
-          <textareaanalytics
+          <textarea
             style={{
               fontFamily: "arial",
               borderColor: styles.colors.borderGrey,
